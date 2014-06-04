@@ -1,5 +1,5 @@
 % Copyright (C) 2013-2014 Shanghai Experimental School T.M. Mathematical Modeling Group. All rights are reserved!
-% This is the paper, Curriculum Schedule Optimization, Version 3.3 (Final), Date 2014-05-30.
+% This is the paper, Curriculum Schedule Optimization, Version 3.4 (Final-2), Date 2014-06-04.
 % The file is distributed only for people of the T.M. Mathematical Modeling Group.
 % Permission for any other use of this file must be obtained in writing
 % from the copyright holders and authors (Yiwei Tan, Yifan Cao, Sichong Zhao).
@@ -12,6 +12,10 @@
 \xeCJKsetup{CJKspace=true}
 \setCJKmainfont[BoldFont=SimHei,ItalicFont=KaiTi]{SimSun}
 \setlength{\parindent}{2em}
+\setlength{\hoffset}{-30pt}
+\setlength{\voffset}{-20pt}
+\setlength{\textwidth}{405pt}
+\setlength{\textheight}{670pt}
 \usepackage{hyperref}
 \hypersetup{unicode,bookmarksnumbered,bookmarksopen,breaklinks,colorlinks,linkcolor=black,citecolor=black,urlcolor=black}
 \usepackage{fancyhdr}
@@ -50,39 +54,38 @@ keywordstyle=\color{blue}
 \setcounter{secnumdepth}{5}
 \setcounter{tocdepth}{5}
 % 以下是特殊序号用计数器(2-4级)
-\newcounter{verytwo}
-\newcommand{\verytwo}{\stepcounter{verytwo}\textbf{\thesection.\arabic{verytwo}}\quad}
-\newcommand{\verytwostart}{\setcounter{verytwo}{0}\noindent}
-\newcounter{verythree}
-\newcommand{\verythree}{\stepcounter{verythree}\textbf{\thesubsection.\arabic{verythree}}\quad}
-\newcommand{\verythreestart}{\setcounter{verythree}{0}\noindent}
-\newcounter{veryfour}
-\newcommand{\veryfour}{\stepcounter{veryfour}\textbf{\thesubsubsection.\arabic{veryfour}}\quad}
-\newcommand{\veryfourstart}{\setcounter{veryfour}{0}\noindent}
+\newcounter{verytwo}[section]
+\newcommand{\verytwo}{\stepcounter{verytwo}\noindent\textbf{\thesection.\arabic{verytwo}}\quad}
+\newcounter{verythree}[subsection]
+\newcommand{\verythree}{\stepcounter{verythree}\noindent\textbf{\thesubsection.\arabic{verythree}}\quad}
+\newcounter{veryfour}[subsubsection]
+\newcommand{\veryfour}{\stepcounter{veryfour}\noindent\textbf{\thesubsubsection.\arabic{veryfour}}\quad}
+\renewcommand{\headrulewidth}{0.75pt}
+\renewcommand{\baselinestretch}{1.2}
 \renewcommand{\contentsname}{目\quad 录}
 \renewcommand{\refname}{参考文献}
 \renewcommand{\figurename}{\bf 图}
 \renewcommand{\tablename}{\bf 表}
 \renewcommand{\appendixname}{附录}
 \begin{document}
-\lhead{第\,\thepage\,页, 共\,\pageref{LastPage}\,页}
-\chead{上海市实验学校课表评价与优化系统}
-\rhead{Group 1}
+\lhead{\bf 第\,\thepage\,页, 共\,\pageref{LastPage}\,页}
+\chead{\bf 上海市实验学校课表评价与优化系统}
+\rhead{\bf Group 1}
 \title{\bf 上海市实验学校课表评价与优化系统}
 \author{谈易伟\and 曹逸凡\and 赵思翀}
-\date{上海市实验学校\\[4mm]\number\year\,年\,\number\month\,月\,\number\day\,日}
+\date{\number\year\,年\,\number\month\,月\,\number\day\,日}
 \maketitle
 \thispagestyle{empty}
 \section*{\hfil 摘\quad 要}
 \addcontentsline{toc}{section}{摘要}
- 课程安排是提高学生学习效率与成绩的重要因素. 在这篇论文中, 我们的目的是为上海市实验学校设计一个更优的课表, 让这个课表能够使学生的听课效率、教师的教课效率与成绩、升学率等达到最大.\par
+ 课程安排是提高学生学习效率与成绩的重要因素. 在这篇论文中, 我们的目的是为上海市实验学校设计一个更优的课表, 让这个课表能够使学生的听课效率, 教师的教课效率与成绩、升学率等得到提高.\par
  首先, 我们对现有的课表进行了收集与分析. 我们对课表中的一些限定条件进行了总结, 例如每节课的长度以及某些课程的特定安排等.\par
- 之后, 我们对各个课程的重要程度进行了定义. 很明显的, 将所有课程看成是一样重要是粗糙而不合理的, 所以我们以现行的制度为基础, 为所有课程设计了从\,1\,到\,6\,的六级重要程度. 首先, 语数英的重要程度为\,5, 理化为\,3, 其他课程为\,1. 基于现行的会考制度, 我们又对本年级的会考科目进行了加一的处理, 使得各个年级的特点得以突出.\par
- 接着, 我们建立了状态转移模型. 学生的学习效率毫无疑问是与他们的听课效率息息相关的. 首先, 我们将学生的听课效率定为两类, 优良与低下. 我们又假设在一天初始时所有学生的状态都为优良, 在矩阵中的表现即为第一列都为1, 建立了一个\,$2\times2$\,的初始矩阵. 之后, 我们又建立了状态转移概率的矩阵. 在此矩阵中, 我们通过敏感度分析得出了各个状态之间相互转移的概率, 通过不断与初始矩阵相乘来计算每一节课处于各个状态的学生的比例. 其次, 我们又假设在午休之后有一定比例的学生回归满状态, 与上午课程无关, 再进行下午的状态分析. 接着, 我们又建立了一个\,$3\times3$\,的矩阵, 将学生的状态细分为优良, 低下与萎靡 (即毫无学习能力, 例如上课睡觉等), 使得模型更加真实可靠. 在优化模型中, 我们具体分析了学生的听课效率, 对课程进行了文理性分析, 又对体育课做了特殊的处理.\par
- 在下一个模型中, 我们基于上一个模型所给出的学生状态与重要程度对课表进行了打分. 我们分别对\,$2\times2$\,与\,$3\times3$\,的矩阵进行了打分, 即求课程重要程度与学生状态比例的乘积之和, 以计算学生的总听课效率. 之后, 我们又建立了老师教课效率的模型. 在此模型中, 我们对教师的授课状态同样做了状态转移模型, 以计算每一节课教师的授课效率. 之后, 我们将教师的授课效率与学生的听课效率结合在一起, 通过道格拉斯生产函数计算了更准确的学生学习效果.\par
+ 之后, 我们对各个课程的重要程度进行了定义. 很明显的, 将所有课程看成是一样重要是粗糙而不合理的, 所以我们以现行的制度为基础, 为所有课程设计了从\,1\,到\,6\,的六级重要程度. 首先, 语数英的重要程度为\,5, 物理与化学为\,3, 其他课程为\,1. 基于现行的会考制度, 我们又对本年级的会考科目进行了加一的处理, 使得各个年级的特点得以突出.\par
+ 接着, 我们建立了状态转移模型. 学生的学习效率毫无疑问是与他们的听课效率息息相关的. 首先, 我们将学生的听课效率定为两类, 优良与低下. 我们又假设在一天初始时所有学生的状态都为优良, 在矩阵中的表现即为第一列都为\,1, 建立了一个\,$2\times2$\,的初始矩阵. 之后, 我们又建立了状态转移概率的矩阵. 在此矩阵中, 我们通过敏感度分析得出了各个状态之间相互转移的概率, 通过不断与初始矩阵相乘来计算每一节课处于各个状态的学生的比例. 其次, 我们又假设在午休之后有一定比例的学生回归满状态, 与上午课程无关, 再进行下午的状态分析. 接着, 我们又建立了一个\,$3\times3$\,的矩阵, 将学生的状态细分为优良, 低下与萎靡 (即毫无学习能力, 例如上课睡觉等), 使得模型更加真实可靠. 在优化模型中, 我们具体分析了学生的听课效率, 对课程进行了文理性分析, 又对体育课做了特殊的处理.\par
+ 在下一个模型中, 我们基于上一个模型所给出的学生状态与重要程度对课表进行了打分. 我们分别对\,$2\times2$\,与\,$3\times3$\,的矩阵进行了打分, 即求课程重要程度与学生状态比例的乘积之和, 以计算学生的总听课效率. 之后, 我们又建立了老师教课效率模型. 在此模型中, 我们对教师的授课状态同样做了状态转移模型, 以计算每一节课教师的授课效率. 之后, 我们将教师的授课效率与学生的听课效率结合在一起, 通过\,Douglas\,生产函数计算了更准确的学生学习效果.\par
  接着我们对现行课表进行了上述的处理, 再将其与高一以来的考试成绩对比, 发现其有较高的吻合度, 验证了我们模型的准确性.\par
  之后, 我们设计了计算机模型, 通过程序来进行上述几个模型的计算, 得出了最优课表并同时进行了敏感度分析. 我们得出不考虑会考科目对现行课表的平均优化率为\,2.308\%, 考虑会考科目的平均优化率为\,4.135\%. 在加入了敏感度分析与优化模型后的平均优化率为\,6.122\%.\par
- 接着, 我们又将一天九节课为基础进行了优化. 再将自修课定义并加入状态转移模型后, 我们得到了新的九节课的课表. 九节课课表对于原课表的平均优化率为\,20.765\%. 在另一种九节课模型中, 我们得出的平均优化率为\,6.484\%. 最后, 我们也将吃饭后的学习效率加入了优化.\par
+ 接着, 我们又将一天\,9\,节课为基础进行了优化. 再将自修课定义并加入状态转移模型后, 我们得到了新的\,9\,节课的课表. 9\,节课课表对于原课表的平均优化率为\,20.765\%. 在另一种\,9\,节课模型中, 我们得出的平均优化率为\,6.484\%. 最后, 我们也将吃饭后的学习效率加入了优化.\par
  最后, 我们将现行课表进行优化后的综合优化率大约为\,6.2\%\,左右, 对学生的学习效果有了可观的提升.
 \clearpage
 \tableofcontents
@@ -91,13 +94,16 @@ keywordstyle=\color{blue}
  本文主要研究的是上海市实验学校初高中的课程安排. 虽然现在的课程安排已经较完善, 但是结合亲身经历, 发现教师与学生都对现在的课程有所不满. 例如, 老师对连续教课及课程过于分散导致自己活动时间较少感到不满, 再比如许多学生在下午上课时感到疲倦, 接受效率低, 这些都是我们需要解决的问题. 通过重新安排、优化课程表, 我们才可以使学生及老师都能够获得最高的效率, 有效提高教师的授课效率及学生的接受效率.
  本文通过使用马尔科夫链建立学生与老师的状态模型得出最优安排. 我们接着优化了许多特殊课程与设定, 例如高三的优化, 创新班的优化, 以及特需课程、社团课等的优化.
 \vspace{2cm}
-\section{总假设}\verytwostart
+\section{总假设}
  \verytwo 本文只考虑现行高考制度下的课表改革, 并且只选取了我们本校的高一年级进行具体的打分与优化.\par
- {\it 鉴于考虑大范围的课表优化在时间上的可行性不强, 又我们均为高一学生, 对于高一课程设置与老师安排较为熟悉, 故本文只选取了我校高一年级作为考察对象.}\\[2mm]
+ {\it 鉴于考虑大范围的课表优化在时间上的可行性不强, 又我们均为高一学生, 对于高一课程设置与老师安排较为熟悉, 故本文只选取了我校高一年级作为考察对象.}\par
+ \vspace{2mm}
  \verytwo 本文假设了学生上课效率与学生成绩呈正相关, 通过学生的成绩来衡量课表的优劣.\par
- {\it 上课是学生学习的重要组成部分, 而其余诸如课外辅导等灵活度太强, 且本身与课表优化关系不大, 故本文就不一一考虑.}\\[2mm]
+ {\it 上课是学生学习的重要组成部分, 而其余诸如课外辅导等灵活度太强, 且本身与课表优化关系不大, 故本文就不一一考虑.}\par
+ \vspace{2mm}
  \verytwo 本文假设学校的指定课程不纳入分析与整改的范围内.\par
- {\it 这些指定课程大多为我校特色课程或代表性课程, 在全市范围内可比性不强, 不能进行合理的考量与分析, 故不将其列入范围内.}\\[2mm]
+ {\it 这些指定课程大多为我校特色课程或代表性课程, 在全市范围内可比性不强, 不能进行合理的考量与分析, 故不将其列入范围内.}\par
+ \vspace{2mm}
  \verytwo 本文不把早自修纳入考虑范围内.\par
  {\it 早自修安排相对固定, 所以课程调整中早自修基本不会造成任何影响, 故不把它纳入考虑范围内.}
 \clearpage
@@ -157,12 +163,11 @@ keywordstyle=\color{blue}
   \end{table}
   \subsubsection{重要程度分级}
    首先我们将科目的重要程度分为三级. 例如现行的课表中, 语数英物化与其他副科 (例如历史, 地理等) 的课程安排也有明显的倾向性. 基于现行的基础, 我们更深地优化了各个课程的偏向, 为不同的年级与班级也设定了不同的课程重要程度. 下面是对所有年级课程重要程度的基础定义:\par
-   \veryfourstart
    \veryfour 语文、数学、英语重要程度最高, 设为\,5. 作为高考\footnote{
    \hypertarget{gaokao}{\textbf{上海现行高考制度: ``3+1'' 制度}}\par
    经过教育部批准, 从\,2012\,年起, 上海市实行 ``3+1'' 高考方案. ``3''-语文, 数学, 外语, ``1''-政治/历史/地理/物理/化学/生物; 语文\,150\,分, 数学\,150\,分, 外语\,150\,分, 政治/历史/地理/物理/化学/生物\,150\,分, 总分\,600\,分. 其中从文科可选科目: 政治、历史、地理, 理科可选科目: 物理、化学、生物.
-   }的必考科目, 语文、数学、英语无论是在哪个学校哪个年级, 都是最为重要的科目.\\
-   \veryfour 物理、化学的重要程度次之, 设为\,3. 虽然物理与化学在初中也属于主课的范畴, 但是从现行的高考制度\hyperlink{gaokao}{\footnotemark[1]}上可以看出, 物理、化学只是以\,3+1\,入门选修科目的形式出现在高考之中. 由此看出物理与化学的重要程度不如语数英那么高, 所以将它们的重要程度定义为\,3.\\
+   }的必考科目, 语文、数学、英语无论是在哪个学校哪个年级, 都是最为重要的科目.\par
+   \veryfour 物理、化学的重要程度次之, 设为\,3. 虽然物理与化学在初中也属于主课的范畴, 但是从现行的高考制度\hyperlink{gaokao}{\footnotemark[1]}上可以看出, 物理、化学只是以\,3+1\,入门选修科目的形式出现在高考之中. 由此看出物理与化学的重要程度不如语数英那么高, 所以将它们的重要程度定义为\,3.\par
    \veryfour 其余的科目 (历史、地理、TFT、体育、活动、信息、研究/TI、音乐、班会、社团、特需/自修) 作为副课处理, 由于其重要程度没有之前的高, 所以设为\,1.
   \subsubsection{会考科目}
    由于现行的自主招生制度\footnote{
@@ -178,9 +183,8 @@ keywordstyle=\color{blue}
    3. 文科考生的政史地科目等第必须为\,A, 理科考生的理化生科目等第必须为\,A;
    4. 考生还必须参加语数科目的附加题考试, 且成绩达到一定要求.
    }有了大幅改动, 所以对于需要会考的科目我们将重新评价其重要程度. 我们可以发现对于有会考要求的科目, 学生注重程度都会有所提升所以我们进行第一轮调整:\par
-   \veryfourstart
    \veryfour 对于需要会考的副课课程重要程度在原先基础上增加一点. (主课的重要程度的区分已经较为明显, 所以不做调整)\par
-   然而这样的调整也是不完全合理的, 在一年里会考的科目有限, 所以说本年会考科目和第二年的会考科目在本年里的重要程度也是显然不同的. 所以我们有进行了第二轮调整:\\
+   然而这样的调整也是不完全合理的, 在一年里会考的科目有限, 所以说本年会考科目和第二年的会考科目在本年里的重要程度也是显然不同的. 所以我们有进行了第二轮调整:\par
    \veryfour 对于本学年要进行会考的科目来说在原先的基础再增加一点重要程度.\par
    由此我们就得到了对于不同年级的学科重要程度, 我们这里先列举高一课程的重要程度.\par
    \begin{table}[H]
@@ -212,9 +216,9 @@ keywordstyle=\color{blue}
    我们可以发现上述方法所处理得到的结果和现有课表的科目数量基本吻合. 即课程安排的数量就是其重要程度 (依据平行班的课程数目). 当然这只是一种定义方法, 可以有别的重要程度定义, 我们这里就选用这一种作为基础.
 \clearpage
 \section{模型一: 学生课表分析模型设立}
- \subsection{假设}\verythreestart
-  \verythree 学习的效率只由学生决定, 与老师的授课效率无关.\\
-  \verythree 成绩和学生在校的学习效率正相关, 且学生在校学习的效率提高是成绩提升最为重要的因素.\\
+ \subsection{假设}
+  \verythree 学习的效率只由学生决定, 与老师的授课效率无关.\par
+  \verythree 成绩和学生在校的学习效率正相关, 且学生在校学习的效率提高是成绩提升最为重要的因素.\par
   \verythree 在所有课程效率考量中我们不考虑学科的考试以及带来的影响.
  \subsection{变量与常量}
   \begin{center}
@@ -305,7 +309,6 @@ keywordstyle=\color{blue}
    \end{tikzpicture}
    \caption{马尔可夫链\,2\,状态转移概率}
    \end{figure}
-   \clearpage
    \begin{figure}[H]
    \centering
    \begin{tikzpicture}[thick]
@@ -369,8 +372,8 @@ keywordstyle=\color{blue}
   a_0 & 1-a_0 & 0
   \end{bmatrix}
   \end{equation}\par
-  其中对于矩阵\,$2\times2$\,来说, 学生学习状态的比例分别为\,$a_{0,1}-a_0$.\par
-  而对于矩阵\,$3\times3$\,来说, 学生学习状态的比例则分别为\,$a_{0,1}-a_{0,0}$.\par
+  其中对于矩阵\,$2\times2$\,来说, 学生学习状态的比例分别为\,$a_0,1-a_0$.\par
+  而对于矩阵\,$3\times3$\,来说, 学生学习状态的比例则分别为\,$a_0,1-a_0,0$.\par
   在通过上面我们对于学生在午后的学习效率的分析, 我们可以初步的得到\,$a_0$\,的值.\par
   依据此我们就可以进行下午学习效率的计算.
  \subsubsection{对于每节课的末状态进行定义 (3*3\,的情形)}
@@ -558,7 +561,7 @@ keywordstyle=\color{blue}
    $\beta$ & $L$\,的产出弹性\\\hline
    \end{tabular}
    \end{center}
-   首先我们分析\,Cobb-Douglas\,生产函数\,\cite{ISBN9787040311501-2}\,与学生学习之间的联系, 在\,Cobb-Douglas 生产函数中, 有着产量与技术水平, 投入资本量, 投入劳动力的函数关系, 而在学生的学习上面, 同样也存在着学生学习效果 (主要表现形式为考试成绩) 与学生素质, 老师的授课效率, 学生的学习效率之间的函数关系, 所以我们在这里讲两者进行类比, 产量与学生的学习效果相匹配, 技术水平与学生素质相匹配 (即初始的学生学习情况与能力), 投入资本量与老师的授课相率相匹配, 投入劳动力与学生的接受效率相匹配.
+   首先我们分析\,Cobb-Douglas\,生产函数\,\cite{ISBN9787040311501-2}\,与学生学习之间的联系, 在\,Cobb-Douglas\,生产函数中, 有着产量与技术水平, 投入资本量, 投入劳动力的函数关系, 而在学生的学习上面, 同样也存在着学生学习效果 (主要表现形式为考试成绩) 与学生素质, 老师的授课效率, 学生的学习效率之间的函数关系, 所以我们在这里讲两者进行类比, 产量与学生的学习效果相匹配, 技术水平与学生素质相匹配 (即初始的学生学习情况与能力), 投入资本量与老师的授课相率相匹配, 投入劳动力与学生的接受效率相匹配.
    \begin{equation}
    Y=AK^\alpha L^\beta
    \end{equation}
@@ -611,6 +614,7 @@ keywordstyle=\color{blue}
   \caption{平行班的吻合度分析}
   \end{figure}
   我们可以发现在平行班的打分中吻合度还是较高的.
+ \clearpage
  \subsection{理科班和创新班的吻合度分析}
   相同的, 我们根据平行班的分析方法, 分析理科班和创新班的吻合度, 得出了以下分数.
   \begin{table}[H]
@@ -742,6 +746,7 @@ keywordstyle=\color{blue}
   \caption{创新班课表最优成绩}
   \end{figure}
   这里我们可以发现, 我们计算得出的只是单个课表在满足基本条件的情况下得出的局部近似最优解, 即没有考虑整个年级下的冲突问题. 我们将在\,6.4\,中整年级课表的安排中进行具体分析.
+ \clearpage
  \subsection{敏感度分析}
   我们可以很明显地发现在之前的程序中有很多的参数是直接得到的, 没有写出直接的理由. 我们在这里着重对于状态转移矩阵进行敏感度分析.\par
   我们将矩阵先量化, 这里我们例举了重要程度为\,3\,的课程的二阶状态转移矩阵.\par
@@ -820,6 +825,7 @@ keywordstyle=\color{blue}
   4. 体育课必须有两个班一起上.\par
   5. 活动课必须有三个班一起上.\par
   通过以上的条件和之前的结果, 我们调整得出了一份高一整个年级的较优课表. 具体课表见下.
+  \clearpage
   \subsubsection{高一(1)班}
    \begin{tabular}{|c|c|c|c|c|c|}
    \hline
@@ -859,6 +865,7 @@ keywordstyle=\color{blue}
    \bf 7 & 活动 & 语文 & 化学 & 体育 & 班会 \\\hline
    \bf 8 & 拓展 & TFT  & 特需 & 政治 & 社团 \\\hline
    \end{tabular}
+  \clearpage
   \subsubsection{高一(4)班}
    \begin{tabular}{|c|c|c|c|c|c|}
    \hline
@@ -987,10 +994,10 @@ keywordstyle=\color{blue}
   15:10--15:50 & 第\,8\,节课 \\\hline
   16:00--16:40 & 第\,9\,节课 \\\hline
   \end{tabular}
-  \caption{九节课课程安排时间表}
+  \caption{9\,节课课程安排时间表}
   \end{table}
-  之前我们分析了八节课情况下的优化, 不难看出优化率并不是非常高, 无法完全达到我们课表改革的目的. 九节课的模式大体上将每天\,20\,分钟的早自修与最后一节\,60\,分钟的课时合并为两节\,40\,分钟的课时, 通过增加自修课, 提高学生午后学习效率, 使学生、学校双方面受益.\par
-  1. 学生通过这样的九节课模式, 多出了自修课、拓展课与特需课, 从而节省了现在许多同学中午用来参与活动的时间, 中午更好的放松休息能大大提高同学们午后的学习效率.\par
+  之前我们分析了\,8\,节课情况下的优化, 不难看出优化率并不是非常高, 无法完全达到我们课表改革的目的. 9\,节课的模式大体上将每天\,20\,分钟的早自修与最后一节\,60\,分钟的课时合并为两节\,40\,分钟的课时, 通过增加自修课, 提高学生午后学习效率, 使学生、学校双方面受益.\par
+  1. 学生通过这样的\,9\,节课模式, 多出了自修课、拓展课与特需课, 从而节省了现在许多同学中午用来参与活动的时间, 中午更好的放松休息能大大提高同学们午后的学习效率.\par
   2. 学校通过这种模式节省了教师授课的部分开支, 解决了部分老师早自修与\,60\,分钟的课程安排不合理的问题; 同时学生学习效率的提高对学校总体成绩会有显著影响.\par
   而余下的课时我们将用于自修课 (每个班级增加了\,53\,分钟的自主学习时间), 这里我们对于自修课的状态转移矩阵进行定义, 我们假设同学们积极利用自修课时间, 建状态调至最佳, 这时下一节课的初始状态矩阵就转为:
   \begin{equation}
@@ -1045,6 +1052,7 @@ keywordstyle=\color{blue}
    \bf 8 & TFT  & 化学 & 特需 & 体育 & 社团 \\\hline
    \bf 9 & 拓展 & 拓展 & 特需 & 政治 & 社团 \\\hline
    \end{tabular}
+  \clearpage
   \subsubsection{高一(4)班}
    \begin{tabular}{|c|c|c|c|c|c|}
    \hline
@@ -1079,17 +1087,17 @@ keywordstyle=\color{blue}
    & \bf 星期一 & \bf 星期二 & \bf 星期三 & \bf 星期四 & \bf 星期五 \\\hline
    \bf 1 & 语文 & 数学 & 数学 & 数学 & 地理 \\\hline
    \bf 2 & 语文 & 语文 & 历史 & 自修 & 英语 \\\hline
-   \bf 3 & 地理 & STS & 自修 & 物理 & 信息 \\\hline
+   \bf 3 & 地理 & 研究 & 自修 & 物理 & 信息 \\\hline
    \bf 4 & 活动 & 体育 & 英语 & 体育 & 信息 \\\hline
    \bf 5 & 数学 & 化学 & 物理 & 政治 & 政治 \\\hline
    \bf 6 & 物理 & 地理 & 特需 & 英语 & 化学 \\\hline
    \bf 7 & 化学 & 自修 & 特需 & 音乐 & 班会 \\\hline
-   \bf 8 & TFT & 英语 & 特需 & 历史 & 社团 \\\hline
+   \bf 8 & TFT  & 英语 & 特需 & 历史 & 社团 \\\hline
    \bf 9 & 拓展 & 拓展 & 特需 & 语文 & 社团 \\\hline
    \end{tabular}
  \clearpage
  \subsection{打分}
-  我们用之前最完整的\,6.5.3\,打分系统, 进行了细微的调整, 并用其对于这张九节课课表进行打分和优化率分析.
+  我们用之前最完整的\,6.5.3\,打分系统, 进行了细微的调整, 并用其对于这张\,9\,节课课表进行打分和优化率分析.
   \begin{table}[H]
   \centering
   \begin{tabular}{|c|c|c|c|}
@@ -1108,7 +1116,7 @@ keywordstyle=\color{blue}
   \centerline{\includegraphics[scale=0.7]{9lessons.eps}}
   \caption{9\,节课打分. 上图为前后分数对比, 下图为优化率.}
   \end{figure}
-  我们很惊喜的发现, 自修课之后一半都有英语课, 这样学生不但能在课上有时间复习英语默写, 取得好成绩, 也不会因此影响英语课之前的课程的学习效率, 使得整张课表显得更为科学.
+  我们很惊喜的发现, 自修课之后一般都有英语课, 这样学生不但能在课上有时间复习英语默写, 取得好成绩, 也不会因此影响英语课之前课程的学习效率, 使得整张课表显得更为科学.
  \subsection{敏感度分析}
   我们发现优化率出奇的高, 所以我们对于自修课后一节课的状态进行敏感度分析. 我们选取了高一(6)班 (创新班) 以及高一(1)班 (平行班) 进行分析, 同时以原课表分数作为基准线绘制得出了如下图像:
   \begin{figure}[H]
@@ -1119,7 +1127,8 @@ keywordstyle=\color{blue}
   \centerline{\includegraphics[scale=0.5]{sennorm.eps}}
   \caption{敏感度分析: 高一(1)班 (平行班)}
   \end{figure}
-  我们可以发现高一(6)班只有当初状态分数小于\,40\%\,时才比原课表分数低, 而高一(1)班更是达到了\,15\%. 可以说九节课的优化效果还是不错的.
+  我们可以发现高一(6)班只有当初状态分数小于\,40\%\,时才比原课表分数低, 而高一(1)班更是达到了\,15\%. 可以说\,9\,节课的优化效果还是不错的.
+ \clearpage
  \subsection{新\,9\,节课想法及优化}
   我们在这里提出一种新的优化模式, 在周四下午末\,2\,节增加自修课, 其余和之前变化相同. 目的在于留出时间进行年级, 部级, 校级的活动或是比赛, 这样可以避免在中午的时间进行以上活动, 给同学们留出中午的时间. 下面是新优化的\,9\,节课课表及其打分和优化率:
   \subsubsection{高一(1)班}
@@ -1164,6 +1173,7 @@ keywordstyle=\color{blue}
    \bf 8 & TFT  & 政治 & 特需 & 自修 & 社团 \\\hline
    \bf 9 & 拓展 & 拓展 & 特需 & 自修 & 社团 \\\hline
    \end{tabular}
+  \clearpage
   \subsubsection{高一(4)班}
    \begin{tabular}{|c|c|c|c|c|c|}
    \hline
@@ -1171,9 +1181,9 @@ keywordstyle=\color{blue}
    \bf 1 & 数学 & 数学 & 英语 & 数学 & 语文 \\\hline
    \bf 2 & 物理 & 体育 & 数学 & 语文 & 语文 \\\hline
    \bf 3 & 政治 & 语文 & 政治 & 英语 & 数学 \\\hline
-   \bf 4 & 活动 & 英语 & 音乐 & 历史 & 地理 \\\hline
+   \bf 4 & 活动 & 英语 & 音乐 & 历史 & 物理 \\\hline
    \bf 5 & 英语 & 物理 & 信息 & 研究 & 英语 \\\hline
-   \bf 6 & 语文 & 物理 & 信息 & 历史 & 化学 \\\hline
+   \bf 6 & 语文 & 历史 & 信息 & 地理 & 化学 \\\hline
    \bf 7 & 化学 & 化学 & 地理 & 体育 & 班会 \\\hline
    \bf 8 & TFT  & 地理 & 特需 & 自修 & 社团 \\\hline
    \bf 9 & 拓展 & 拓展 & 特需 & 自修 & 社团 \\\hline
@@ -1226,8 +1236,8 @@ keywordstyle=\color{blue}
    \caption{新\,9\,节课打分. 上图为前后分数对比, 下图为优化率.}
    \end{figure}
 \clearpage
-\section{细微改动}\verytwostart
- \verytwo 我们将调整课后竞赛班的时间, 首先, 现在的吃饭时间学生们普遍反应较紧, 用餐不到位, 一来影响之后的学习效果 (饿肚子学习效率低, 边吃东西边上课学习效率更低), 二来刚吃饱饭就上课对于思考和肠胃消化多是不利的. 分析图像\,\cite{food}, 我们将竞赛班时间延后至\,17:15\,左右更为合适, 消化的情况较好, 同时提高学习的效率.
+\section{细微改动}
+ 我们将调整课后竞赛班的时间, 首先, 现在的吃饭时间学生们普遍反应较紧, 用餐不到位, 一来影响之后的学习效果 (饿肚子学习效率低, 边吃东西边上课学习效率更低), 二来刚吃饱饭就上课对于思考和肠胃消化多是不利的. 分析图像\,\cite{food}, 我们将竞赛班时间延后至\,17:15\,左右更为合适, 消化的情况较好, 同时提高学习的效率.
  \begin{figure}[H]
  \centerline{\begin{overpic}[scale=0.5]{food.eps}
  \put(49,4){时间}
@@ -1239,17 +1249,17 @@ keywordstyle=\color{blue}
  \end{figure}
 \clearpage
 \section{结论}
- 本文对于现行的八节课课表进行了优化, 通过调整每节课的顺序, 使学生的学习效率提高了约6.2\%, 之后本文又对于课表课程数目进行了调整, 通过增加自修课以及特需课等, 解决了老师上课和培训的冲突问题和学校活动的时间安排问题, 同时又增加了学生的自主学习时间 (每个班级增加了\,53\,分钟的自主学习时间).
+ 本文对于现行的\,8\,节课课表进行了优化, 通过调整每节课的顺序, 使学生的学习效率提高了约6.2\%, 之后本文又对于课表课程数目进行了调整, 通过增加自修课以及特需课等, 解决了老师上课和培训的冲突问题和学校活动的时间安排问题, 同时又增加了学生的自主学习时间 (每个班级增加了\,53\,分钟的自主学习时间).
 \clearpage
 \section{优缺点}
- \subsection{优点}\verythreestart
-  \verythree 本文对于学生的学习效率进行了具体的讨论并考虑到了每节课对于之后课程的影响.\\
+ \subsection{优点}
+  \verythree 本文对于学生的学习效率进行了具体的讨论并考虑到了每节课对于之后课程的影响.\par
   \verythree 本文考虑了许多现实中的条件并将课表的打分进行了量化.
- \subsection{缺点}\verythreestart
-  \verythree 本文没有考虑课时的调整对于课表的安排有何影响, 只是按现在课表的课时数目进行安排.\\
-  \verythree 本文没有考虑到多个年级的老师冲突问题 (即部分老师即上高一, 又上其他年级).\\
-  \verythree 本文对于课表的优化思路较为单一, 没有选取更多角度进行优化.\\
-  \verythree 我们没有考虑到各个班级的差异, 对于课表进行差异化 (如偏重文科、理科或创新) 的安排.
+ \subsection{缺点}
+  \verythree 本文没有考虑课时的调整对于课表的安排有何影响, 只是按现在课表的课时数目进行安排.\par
+  \verythree 本文没有考虑到多个年级的老师冲突问题 (即部分老师即上高一, 又上其他年级).\par
+  \verythree 本文对于课表的优化思路较为单一, 没有选取更多角度进行优化.\par
+  \verythree 本文没有考虑到各个班级的差异, 对于课表进行差异化 (如偏重文科、理科或创新) 的安排.
 \clearpage
 \bibliographystyle{plain}
 \bibliography{references}
@@ -1258,10 +1268,11 @@ keywordstyle=\color{blue}
 \clearpage
 \begin{appendices}
 \section{程序源代码}
+ \renewcommand{\baselinestretch}{1}
  \hypertarget{program}{}
- \setlength{\marginparsep}{-410pt}
+ \setlength{\marginparsep}{-470pt}
  \newcounter{linenum}
- \marginpar{\flushright\tt\footnotesize\color{gray}\vspace{9.5pt}\forloop{linenum}{1}{\value{linenum}<47}{\arabic{linenum}\\[2.5pt]}\arabic{linenum}}
+ \marginpar{\flushright\tt\footnotesize\color{gray}\vspace{11pt}\forloop{linenum}{1}{\value{linenum}<47}{\arabic{linenum}\\[2.5pt]}\arabic{linenum}}
  \begin{lstlisting}
  lesn=[
  1	1	6	12	2	4	5	18	18;
