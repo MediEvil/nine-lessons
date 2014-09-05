@@ -1,4 +1,4 @@
 Chinese-Curriculum
 ==================
 
-Chinese Paper - Curriculum Schedule Optimization
+Chinese Paper - Curriculum Schedule Optimization of Nine Lessons
